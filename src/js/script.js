@@ -5,13 +5,16 @@ const context = canvas.getContext("2d");
 
 const fst_Building = new Image();
 const scd_Building = new Image();
+const train = new Image();
 const man = new Image();
 const streetfloor = new Image();
 const cars = new Image();
 const sky = new Image();
 
-fst_Building.src = "../assets/fst_Building.png";
-scd_Building.src = "../assets/scd_Building.png";
+fst_Building.src = "../assets/green_building.png";
+train.src = "../assets/train.png";
+scd_Building.src = "../assets/blue_building.png";
+
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
@@ -27,12 +30,25 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
-let speed_build = 1.5;
+
+let speed_build =1.3;
+let speed_build2 =0.2;
+/*let speed_build3 =1.5;      <Add building 3 if needed>*/
 let building = [];
 building[0] = {
   x: canvas.width,
   y: 150
 };
+let building2 = [];
+building2[0] = {
+  x: canvas.width,
+  y: 150
+};
+/*let building3 = [];  <Add building 3 if needed>
+building[0] = {
+  x: canvas.width,
+  y: 150
+};*/
 let invincible = false;
 
 //Hit Box
@@ -50,7 +66,6 @@ function hitbox() {
       setTimeout(() => (invincible = false), 1500);
     } else if (obstacles[i].x + cars.width <= 0) {
       obstacles.shift(i, 1);
-      console.log(obstacles.length);
     }
   }
 }
@@ -69,8 +84,35 @@ function obs() {
   }
 }
 
-// Building movement speed
+/* Building movement speed
+building 1 */
 function build() {
+  for (let i = 0; i < building.length; i++) {
+    context.drawImage(fst_Building, building[i].x, building[i].y);
+    building[i].x -= speed_build;
+
+    if (building[i].x === 664) {
+      building.push({
+        x: canvas.width,
+        y: 250
+      });
+    }
+  }
+
+//building 2
+  for (let i = 0; i < building2.length; i++) {
+    context.drawImage(scd_Building, building2[i].x, building2[i].y);
+    building2[i].x -= speed_build2;
+
+    if (building2[i].x === 664) {
+      building2.push({
+        x: canvas.width,
+        y: 250
+      });
+    }
+  }
+
+  /*building 3
   for (let i = 0; i < building.length; i++) {
     context.drawImage(fst_Building, building[i].x, building[i].y);
     building[i].x -= speed_build;
@@ -82,9 +124,10 @@ function build() {
       });
     }
   }
+  */
 }
 
-
+// Jump function
 function jump(event) {
   switch (event.keyCode) {
     case 32:
@@ -103,7 +146,8 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
-  context.drawImage(scd_Building, 1166, 250);
+  context.drawImage(scd_Building, 1166, 255);
+  context.drawImage(train, 0, 300);
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   build();
   obs();
