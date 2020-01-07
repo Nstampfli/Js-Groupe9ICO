@@ -30,6 +30,7 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
+
 let speed_build =1.3;
 let speed_build2 =0.2;
 /*let speed_build3 =1.5;      <Add building 3 if needed>*/
@@ -49,7 +50,6 @@ building[0] = {
   y: 150
 };*/
 let invincible = false;
-
 
 //Hit Box
 
