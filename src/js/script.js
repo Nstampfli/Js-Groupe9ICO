@@ -3,6 +3,7 @@ const context = canvas.getContext("2d");
 
 //Load Image
 
+const bridge = new Image();
 const fst_Building = new Image();
 const scd_Building = new Image();
 const train = new Image();
@@ -14,7 +15,7 @@ const sky = new Image();
 fst_Building.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
 scd_Building.src = "../assets/blue_building.png";
-
+bridge.src = "../assets/bridge.png"
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
@@ -56,7 +57,6 @@ let invincible = false;
 let jumps = false;
 
 //Hit Box
-
 function hitbox() {
   for (let i = 0; i < obstacles.length; i++) {
     if (
@@ -73,6 +73,9 @@ function hitbox() {
     }
   }
 }
+
+//function random obs     -----standby-----
+
 
 //Obs Movement speed
 function obs() {
@@ -131,6 +134,7 @@ function build2() {
   }
   */
 
+// Jump function
 function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
@@ -148,7 +152,6 @@ function jumping() {
   }, 5);
 }
 
-// Jump function
 function jump(event) {
   switch (event.keyCode) {
     case 32:
@@ -166,7 +169,10 @@ function jump(event) {
 function draw() {
   context.drawImage(sky, 0, 0);
   build2();
-  context.drawImage(train, 0, 300);
+  context.drawImage(bridge, 0, 450);
+  context.drawImage(bridge, 535, 450);
+  context.drawImage(bridge, 1070, 450);
+  context.drawImage(train, 0, 400);
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   obs();
