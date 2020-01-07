@@ -3,11 +3,14 @@ const context = canvas.getContext("2d");
 
 //Load Image
 
+const fst_Building = new Image();
 const man = new Image();
 const streetfloor = new Image();
 const cars = new Image();
 const sky = new Image();
 
+fst_Building.src = "../assets/fst_Building.png";
+scd_Building.src = "../assets/sc_Building.png"
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
