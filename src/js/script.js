@@ -101,7 +101,6 @@ function build() {
       });
     }
   }
-
 }
 //building 2
 function build2() {
@@ -109,16 +108,16 @@ function build2() {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
     /*console.log(i);*/
-  if (parseInt(building2[i].x, 10) === 664) {
-    building2.push({
-      x: canvas.width,
-      y: 255
+    if (parseInt(building2[i].x, 10) === 664) {
+      building2.push({
+        x: canvas.width,
+        y: 255
       });
     }
   }
 }
 
-  /*building 3
+/*building 3
   for (let i = 0; i < building.length; i++) {
     context.drawImage(fst_Building, building[i].x, building[i].y);
     building[i].x -= speed_build;
@@ -132,7 +131,6 @@ function build2() {
   }
   */
 
-}
 function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
@@ -158,7 +156,7 @@ function jump(event) {
         jumping();
       }
       break;
-    
+
     default:
       break;
   }
