@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Title font";
+  src: url("../assets/font/04B_03__.TTF");
+}
+
+.containerHomepage {
+  width: 100vw;
+  height: 100vh;
+  background-color: #cccccc;
+}
+
+.containerHomepage--topFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 15%;
+  background-color: brown;
+
+  .containerHomepage--topFlex--title {
+    font-family: "Title font", sans-serif;
+    color: white;
+    font-size: 60px;
+  }
+}
+
+.containerHomepage--middleFlex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 70%;
+  background-color: rosybrown;
+
+  .containerHomepage--middleFlex--rules {
+    background-color: royalblue;
+    width: 45%;
+    height: 70%;
+    text-align: center;
+  }
+
+  .containerHomepage--middleFlex--howToPlay {
+    background-color: blueviolet;
+    width: 45%;
+    height: 70%;
+  }
+}
+
+.containerHomepage--bottomFlex {
+  width: 100vw;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  background-color: burlywood;
+}
