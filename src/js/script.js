@@ -102,17 +102,21 @@ function build() {
     }
   }
 
-  //building 2
+}
+//building 2
+function build2() {
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
-    if (building2[i].x === 664) {
-      building2.push({
-        x: canvas.width,
-        y: 255
+    /*console.log(i);*/
+  if (parseInt(building2[i].x, 10) === 664) {
+    building2.push({
+      x: canvas.width,
+      y: 255
       });
     }
   }
+}
 
   /*building 3
   for (let i = 0; i < building.length; i++) {
@@ -127,6 +131,7 @@ function build() {
     }
   }
   */
+
 }
 function jumping() {
   jumps = true;
@@ -144,6 +149,7 @@ function jumping() {
     }
   }, 5);
 }
+
 // Jump function
 function jump(event) {
   switch (event.keyCode) {
@@ -160,6 +166,7 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
+  build2();
   context.drawImage(train, 0, 300);
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
