@@ -165,7 +165,6 @@ function jump(event) {
   }
 }
 
-
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
