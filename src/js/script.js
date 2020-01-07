@@ -30,19 +30,19 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
+let speed_build =1;
+let speed_build2 = 0.2;
 
-let speed_build =1.3;
-let speed_build2 =0.2;
 /*let speed_build3 =1.5;      <Add building 3 if needed>*/
 let building = [];
 building[0] = {
   x: canvas.width,
-  y: 150
+  y: 205
 };
 let building2 = [];
 building2[0] = {
   x: canvas.width,
-  y: 150
+  y: 255
 };
 /*let building3 = [];  <Add building 3 if needed>
 building[0] = {
@@ -90,11 +90,10 @@ function build() {
   for (let i = 0; i < building.length; i++) {
     context.drawImage(fst_Building, building[i].x, building[i].y);
     building[i].x -= speed_build;
-
     if (building[i].x === 664) {
       building.push({
         x: canvas.width,
-        y: 250
+        y: 205
       });
     }
   }
@@ -103,11 +102,10 @@ function build() {
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
-
     if (building2[i].x === 664) {
       building2.push({
         x: canvas.width,
-        y: 250
+        y: 255
       });
     }
   }
@@ -146,10 +144,9 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
-  context.drawImage(scd_Building, 1166, 255);
   context.drawImage(train, 0, 300);
-  context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   build();
+  context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   obs();
   window.addEventListener("keydown", jump);
   context.drawImage(man, manX, manY);
