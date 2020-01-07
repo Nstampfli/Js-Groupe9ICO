@@ -24,15 +24,19 @@ obstacles[0] = {
 };
 let speed = 5;
 let posobs;
-
+let invincible = false;
 //Hit Box
 function hitbox() {
   for (let i = 0; i < obstacles.length; i++) {
     if (
+      invincible == false &&
       obstacles[i].y <= manY + man.height &&
-      manX + man.width > obstacles[i].x
+      manX + man.width >= obstacles[i].x &&
+      manX <= obstacles[i].x + cars.width
     ) {
       console.log("lol");
+      invincible = true;
+      setTimeout((invincible = false), 1500);
     }
   }
 }
