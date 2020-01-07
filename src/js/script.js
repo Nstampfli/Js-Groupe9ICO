@@ -148,6 +148,8 @@ function jumping() {
   }, 5);
 }
 
+/*
+                                              Je ne sais pas quel fonction est la bonne (mon dernier push a déconné).
 // Jump function
 function jump(event) {
   switch (event.keyCode) {
@@ -161,6 +163,8 @@ function jump(event) {
       break;
   }
 }
+*/
+
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
