@@ -24,15 +24,22 @@ obstacles[0] = {
 };
 let speed = 5;
 let posobs;
-
+let invincible = false;
 //Hit Box
 function hitbox() {
   for (let i = 0; i < obstacles.length; i++) {
     if (
+      !invincible &&
       obstacles[i].y <= manY + man.height &&
-      manX + man.width > obstacles[i].x
+      manX + man.width >= obstacles[i].x &&
+      manX <= obstacles[i].x + cars.width
     ) {
       console.log("lol");
+      invincible = true;
+      setTimeout(() => (invincible = false), 1500);
+    } else if (obstacles[i].x + cars.width <= 0) {
+      obstacles.shift(i, 1);
+      console.log(obstacles.length);
     }
   }
 }
@@ -52,16 +59,11 @@ function obs() {
 }
 function jump(event) {
   switch (event.key) {
-    case "ArrowUp":
+    case "z":
       if (manY === 400) {
         manY -= 150;
       }
       break;
-    /*case "ArrowLeft":
-      if (monsterX > 40) {
-        monsterX -= direction;
-      }
-      break;*/
     default:
       break;
   }
