@@ -27,14 +27,13 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
-let speed_build =1.5;
+let speed_build = 1.5;
 let building = [];
 building[0] = {
   x: canvas.width,
   y: 150
 };
 let invincible = false;
-
 
 //Hit Box
 
