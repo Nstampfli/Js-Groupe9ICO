@@ -27,9 +27,17 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
-let posobs;
+let speed_build =1.5;
+let building = [];
+building[0] = {
+  x: canvas.width,
+  y: 150
+};
 let invincible = false;
+
+
 //Hit Box
+
 function hitbox() {
   for (let i = 0; i < obstacles.length; i++) {
     if (
@@ -61,6 +69,23 @@ function obs() {
     }
   }
 }
+
+// Building movement speed
+function build() {
+  for (let i = 0; i < building.length; i++) {
+    context.drawImage(fst_Building, building[i].x, building[i].y);
+    building[i].x -= speed_build;
+
+    if (building[i].x === 664) {
+      building.push({
+        x: canvas.width,
+        y: 150
+      });
+    }
+  }
+}
+
+
 function jump(event) {
   switch (event.key) {
     case "z":
@@ -75,9 +100,9 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
-  context.drawImage(fst_Building, 1066, 150);
   context.drawImage(scd_Building, 1166, 250);
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
+  build();
   obs();
   window.addEventListener("keydown", jump);
   context.drawImage(man, manX, manY);
