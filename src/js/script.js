@@ -30,8 +30,11 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
-let speed_build =1;
+let speed_build = 1;
 let speed_build2 = 0.2;
+
+let jumpup;
+let jumpdown;
 
 /*let speed_build3 =1.5;      <Add building 3 if needed>*/
 let building = [];
@@ -50,6 +53,7 @@ building[0] = {
   y: 150
 };*/
 let invincible = false;
+let jumps = false;
 
 //Hit Box
 
@@ -98,7 +102,7 @@ function build() {
     }
   }
 
-//building 2
+  //building 2
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
@@ -124,19 +128,31 @@ function build() {
   }
   */
 }
-
+function jumping() {
+  jumps = true;
+  jumpup = setInterval(() => {
+    manY--;
+    if (manY < 200) {
+      clearInterval(jumpup);
+      jumpdown = setInterval(() => {
+        manY++;
+        if (manY == 400) {
+          clearInterval(jumpdown);
+          jumps = false;
+        }
+      }, 5);
+    }
+  }, 5);
+}
 // Jump function
 function jump(event) {
   switch (event.keyCode) {
     case 32:
-      if (manY === 400) {
-        manY -= 150;
+      if (jumps == false) {
+        jumping();
       }
       break;
-    case 40:
-      if (manY < 400) {
-        manY += 150;
-      }
+    
     default:
       break;
   }
