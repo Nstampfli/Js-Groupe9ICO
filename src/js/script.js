@@ -4,19 +4,20 @@ const context = canvas.getContext("2d");
 //Load Image
 
 const fst_Building = new Image();
+const scd_Building = new Image();
 const man = new Image();
 const streetfloor = new Image();
 const cars = new Image();
 const sky = new Image();
 
 fst_Building.src = "../assets/fst_Building.png";
-scd_Building.src = "../assets/sc_Building.png"
+scd_Building.src = "../assets/scd_Building.png"
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
 sky.src = "../assets/sky.png";
 
-//Var
+//Position
 
 let manX = 150;
 let manY = 400;
@@ -40,7 +41,7 @@ function hitbox() {
   }
 }
 
-//Obstacles deplacement
+//Obs Movement speed
 function obs() {
   for (let i = 0; i < obstacles.length; i++) {
     context.drawImage(cars, obstacles[i].x, obstacles[i].y);
@@ -72,6 +73,8 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
+  context.drawImage(fst_Building, 1066, 150);
+  context.drawImage(scd_Building, 1166, 250);
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   obs();
   window.addEventListener("keydown", jump);
