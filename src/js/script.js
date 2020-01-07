@@ -30,8 +30,11 @@ obstacles[0] = {
   y: 500
 };
 let speed = 5;
-let speed_build =1;
+let speed_build = 1;
 let speed_build2 = 0.2;
+
+let jumpup;
+let jumpdown;
 
 /*let speed_build3 =1.5;      <Add building 3 if needed>*/
 let building = [];
@@ -50,6 +53,7 @@ building[0] = {
   y: 150
 };*/
 let invincible = false;
+let jumps = false;
 
 //Hit Box
 
@@ -104,16 +108,16 @@ function build2() {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
     /*console.log(i);*/
-  if (parseInt(building2[i].x, 10) === 664) {
-    building2.push({
-      x: canvas.width,
-      y: 255
+    if (parseInt(building2[i].x, 10) === 664) {
+      building2.push({
+        x: canvas.width,
+        y: 255
       });
     }
   }
 }
 
-  /*building 3
+/*building 3
   for (let i = 0; i < building.length; i++) {
     context.drawImage(fst_Building, building[i].x, building[i].y);
     building[i].x -= speed_build;
@@ -127,23 +131,40 @@ function build2() {
   }
   */
 
+function jumping() {
+  jumps = true;
+  jumpup = setInterval(() => {
+    manY--;
+    if (manY < 200) {
+      clearInterval(jumpup);
+      jumpdown = setInterval(() => {
+        manY++;
+        if (manY == 400) {
+          clearInterval(jumpdown);
+          jumps = false;
+        }
+      }, 5);
+    }
+  }, 5);
+}
 
+/*
+                                              Je ne sais pas quel fonction est la bonne (mon dernier push a déconné).
 // Jump function
 function jump(event) {
   switch (event.keyCode) {
     case 32:
-      if (manY === 400) {
-        manY -= 150;
+      if (jumps == false) {
+        jumping();
       }
       break;
-    case 40:
-      if (manY < 400) {
-        manY += 150;
-      }
+
     default:
       break;
   }
 }
+*/
+
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);

@@ -40,45 +40,59 @@ a {
   justify-content: space-around;
   align-items: center;
   width: 100vw;
-  height: 55%;
+  height: 15%;
   background-color: rosybrown;
 
-  .containerHomepage--middleFlex--rules {
-    background-color: royalblue;
-    width: 45%;
-    height: 100%;
-    text-align: center;
-
-    .containerHomepage--middleFlex--rules--title {
-      font-weight: 500;
-      font-family: "Ubuntu", sans-serif;
-      font-size: 30px;
-      margin-top: 2%;
-    }
-
-    .containerHomepage--middleFlex--rules--text {
-      font-family: "Ubuntu", sans-serif;
-      margin: 5%;
-    }
+  .containerHomepage--middleFlex--rules--title {
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 30px;
+    margin-top: 2%;
+    margin-bottom: 1%;
   }
 
-  .containerHomepage--middleFlex--howToPlay {
-    background-color: blueviolet;
-    width: 45%;
-    height: 100%;
-    text-align: center;
+  .containerHomepage--middleFlex--howToPlay--title {
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 30px;
+    margin-top: 2%;
+    margin-bottom: 1%;
+  }
+}
 
-    .containerHomepage--middleFlex--howToPlay--title {
-      font-weight: 500;
-      font-family: "Ubuntu", sans-serif;
-      font-size: 30px;
-      margin-top: 2%;
-    }
+.containerHomepage--middleFlex--2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 40%;
+  background-color: rosybrown;
+}
+.containerHomepage--middleFlex--2--rules {
+  width: 45%;
+  height: 100%;
+  text-align: start;
 
-    .containerHomepage--middleFlex--howToPlay--text {
-      font-family: "Ubuntu", sans-serif;
-      margin: 5%;
-    }
+  .containerHomepage--middleFlex--rules--2--text {
+    font-family: "Ubuntu", sans-serif;
+    margin-top: 0;
+    margin-left: 20%;
+    line-height: 26px;
+    font-weight: 500;
+  }
+}
+
+.containerHomepage--middleFlex--2--howToPlay {
+  width: 45%;
+  height: 100%;
+  text-align: start;
+
+  .containerHomepage--middleFlex--2--howToPlay--text {
+    font-family: "Ubuntu", sans-serif;
+    margin-top: 0;
+    margin-left: 20%;
+    line-height: 26px;
+    font-weight: 500;
   }
 }
 
