@@ -37,17 +37,17 @@ a {
     text-align: center;
     animation: slidein 2s;
     position: relative;
-  }
 
-  @keyframes slidein {
-    from {
-      margin-bottom: 25%;
-      opacity: 0;
-    }
+    @keyframes slidein {
+      from {
+        margin-bottom: 25%;
+        opacity: 0;
+      }
 
-    to {
-      margin-bottom: 0%;
-      opacity: 1;
+      to {
+        margin-bottom: 0%;
+        opacity: 1;
+      }
     }
   }
 
