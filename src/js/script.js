@@ -131,6 +131,7 @@ function build2() {
   }
   */
 
+// Jump function
 function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
@@ -148,9 +149,6 @@ function jumping() {
   }, 5);
 }
 
-/*
-                                              Je ne sais pas quel fonction est la bonne (mon dernier push a déconné).
-// Jump function
 function jump(event) {
   switch (event.keyCode) {
     case 32:
@@ -163,7 +161,7 @@ function jump(event) {
       break;
   }
 }
-*/
+
 
 //Draw
 function draw() {
