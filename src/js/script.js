@@ -14,6 +14,7 @@ const sky = new Image();
 fst_Building.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
 scd_Building.src = "../assets/blue_building.png";
+
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
@@ -128,12 +129,16 @@ function build() {
 
 // Jump function
 function jump(event) {
-  switch (event.key) {
-    case "z":
+  switch (event.keyCode) {
+    case 32:
       if (manY === 400) {
         manY -= 150;
       }
       break;
+    case 40:
+      if (manY < 400) {
+        manY += 150;
+      }
     default:
       break;
   }
