@@ -54,6 +54,7 @@ strollers[0] = {
   x: canvas.width,
   y: 540
 };
+let life = 3;
 let pinkCarSpeed = 5;
 let redCarSpeed = 4;
 let strollerSpeed = 3;
@@ -98,11 +99,19 @@ function hitbox(arrayname, imgname) {
       manX + man.width >= arrayname[i].x &&
       manX <= arrayname[i].x + imgname.width
     ) {
+      if (life >= 0) {
+        life--;
+      }
       console.log("lol");
       invincible = true;
       setTimeout(() => (invincible = false), 1500);
     }
   }
+}
+function lifestyle() {
+  context.fillStyle = "#000";
+  context.font = "30px Verdana";
+  context.fillText("Vie : " + life, 0, 30);
 }
 
 function remove() {
@@ -323,6 +332,7 @@ function draw() {
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   context.drawImage(man, manX, manY);
+  lifestyle();
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
