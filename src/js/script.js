@@ -108,6 +108,14 @@ function trainAction() {
 }
 
 //function random obs     -----standby-----
+function getrandom (max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function randomArray() {
+let randomObs = [obs(), build(), build2()];
+}
+
 
 //Obs Movement speed
 function obs() {
