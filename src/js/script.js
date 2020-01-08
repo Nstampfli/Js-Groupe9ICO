@@ -15,7 +15,7 @@ const sky = new Image();
 fst_Building.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
 scd_Building.src = "../assets/blue_building.png";
-bridge.src = "../assets/bridge.png"
+bridge.src = "../assets/bridge.png";
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 cars.src = "../assets/cars.png";
@@ -75,7 +75,6 @@ function hitbox() {
 }
 
 //function random obs     -----standby-----
-
 
 //Obs Movement speed
 function obs() {
