@@ -96,7 +96,7 @@ function remove() {
   }
 }
 
-//function movement train associate with life & time
+//function movement train (in progress : associate with life & time)
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
@@ -108,12 +108,15 @@ function trainAction() {
 }
 
 //function random obs     -----standby-----
-function getrandom (max) {
+function getRandom (max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+let randomObs;
 function randomArray() {
-let randomObs = [obs(), build(), build2()];
+randomObs = [obs(), build(), build2()];
+  for(let i = 0; i < randomObs.length /* || i < life.lenght*/){
+    randomObs[getRandom()];
 }
 
 
@@ -210,6 +213,7 @@ function jump(event) {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
+  //randomArray();
   build2();
   context.drawImage(bridge, 0, 450);
   context.drawImage(bridge, 523, 450);
