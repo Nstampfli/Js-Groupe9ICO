@@ -14,18 +14,20 @@ const pinkCar = new Image();
 const redCar = new Image();
 const stroller = new Image();
 const sky = new Image();
+const lightning = new Image();
 
 firstBuilding.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
 secondBuilding.src = "../assets/blue_building.png";
 bridge.src = "../assets/bridge.png";
 station.src = "../assets/station.png";
-man.src = "../assets/man.png";
+man.src = "../assets/run3.gif";
 streetfloor.src = "../assets/streetfloor.png";
 pinkCar.src = "../assets/pink_car.png";
 redCar.src = "../assets/red_car.png";
 stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
+lightning.src = "../assets/eclair.png";
 
 // Position
 let time = 120;
@@ -57,7 +59,7 @@ strollers[0] = {
 };
 
 let stationBuilding = [];
-stationBuilding[0] ={
+stationBuilding[0] = {
   x: canvas.width,
   y: 150
 };
@@ -78,6 +80,12 @@ building2[0] = {
   y: 278
 };
 
+let lightnings = [];
+lightnings[0] = {
+  x: 13666,
+  y: 300
+};
+
 //Creation of variable & their value
 let life = 3;
 let jumpup;
@@ -86,6 +94,7 @@ let toto;
 let invincible = false;
 let buildingcreate = true;
 let jumps = false;
+let bonuscondition = false;
 
 //speed
 let pinkCarSpeed = 5;
@@ -116,6 +125,27 @@ function hitbox(arrayname, imgname) {
     }
   }
 }
+function bonushitbox() {
+  for (let i = 0; i < lightnings.length; i++) {
+    if (
+      bonuscondition == false &&
+      lightnings[i].y <= manY + man.height &&
+      manX + man.width >= lightnings[i].x &&
+      manX <= lightnings[i].x + lightning.width
+    ) {
+      bonuscondition = true;
+      speedright = 100;
+      speedleft = 100;
+      setTimeout(() => {
+        speedright = 5;
+        speedleft = 5;
+        bonuscondition = false;
+        console.log("2");
+      }, 5000);
+    }
+  }
+}
+
 function lifestyle() {
   context.fillStyle = "#000";
   context.font = "30px Verdana";
@@ -161,7 +191,7 @@ function trainAction() {
   }
 }
 
-// function Random Obs  
+// function Random Obs
 function getRandom() {
   return Math.floor(Math.random() * 3);
 }
@@ -226,7 +256,7 @@ function addStrollers() {
 
 // Building movement speed
 
-// Building 1 
+// Building 1
 function build() {
   for (let i = 0; i < building.length; i++) {
     context.drawImage(firstBuilding, building[i].x, building[i].y);
@@ -257,19 +287,35 @@ function build2() {
   }
 }
 
-// Building Train Station 
+// Building Train Station
 function buildStation() {
   for (let i = 0; i < stationBuilding.length; i++) {
     context.drawImage(station, stationBuilding[i].x, stationBuilding[i].y);
     stationBuilding[i].x -= speedStation;
-    console.log(stationBuilding[i].x);
-     
+    //console.log(stationBuilding[i].x);
+
     if (parseInt(stationBuilding[i].x, 10) + station.width <= 1366) {
       speedStation = 0;
-      }
     }
   }
+}
+// Bonus movement speed and push
+function bonusspawn() {
+  lightnings.push({
+    x: canvas.width,
+    y: 300
+  });
+}
 
+function bonus() {
+  for (let i = 0; i < lightnings.length; i++) {
+    context.drawImage(lightning, lightnings[i].x, lightnings[i].y);
+    lightnings[i].x -= 10;
+    if (lightnings[i].x === 666) {
+      setTimeout(bonusspawn, Math.floor(Math.random() * 20000 + 20000));
+    }
+  }
+}
 // Hero Jump function & Movement
 function jumping() {
   jumps = true;
@@ -316,7 +362,7 @@ function jump(event) {
   }
 }
 
-//Timer function 
+//Timer function
 function timer() {
   if (time > 0) {
     toto = setInterval(() => {
@@ -345,6 +391,7 @@ function draw() {
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   context.drawImage(man, manX, manY);
+  bonus();
   lifestyle();
   firstCarsCreate();
   secondCarsCreate();
@@ -353,6 +400,7 @@ function draw() {
   hitbox(pinkCars, pinkCar);
   hitbox(redCars, redCar);
   hitbox(strollers, stroller);
+  bonushitbox();
   remove();
   timerstyle();
   requestAnimationFrame(draw);
