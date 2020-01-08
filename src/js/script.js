@@ -99,7 +99,7 @@ function hitbox(arrayname, imgname) {
       manX + man.width >= arrayname[i].x &&
       manX <= arrayname[i].x + imgname.width
     ) {
-      if (life >= 0) {
+      if (life > 0) {
         life--;
       }
       console.log("lol");
