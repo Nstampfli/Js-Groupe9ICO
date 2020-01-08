@@ -96,6 +96,7 @@ function remove() {
   }
 }
 
+
 //function movement train (in progress : associate with life & time)
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
