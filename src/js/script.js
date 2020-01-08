@@ -33,7 +33,7 @@ obstacles[0] = {
 let speed = 5;
 let speed_build = 1;
 let speed_build2 = 0.2;
-let speedTrain = 0.8;
+let speedTrain = 0.13;
 let jumpup;
 let jumpdown;
 
@@ -84,8 +84,9 @@ function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
     trainMov[i].x += speedTrain;
-    if (trainMov[i].x === 960)
-      speedTrain === 0;
+    if (trainMov[i].x + train.width >= 960)
+    
+      speedTrain = 0;
   }
 }
 
