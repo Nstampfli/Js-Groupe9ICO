@@ -22,7 +22,7 @@ cars.src = "../assets/cars.png";
 sky.src = "../assets/sky.png";
 
 //Position
-
+let ab = 120;
 let manX = 150;
 let manY = 400;
 let obstacles = [];
@@ -134,7 +134,7 @@ function obs() {
           x: canvas.width,
           y: 540
         });
-      }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
+      }, Math.floor(Math.random() * (3000 - 1500 + 1) + 1000));
     }
   }
 }
@@ -214,7 +214,18 @@ function jump(event) {
       break;
   }
 }
-
+function timer() {
+  if (ab >= 0) {
+    setInterval(() => {
+      ab--;
+    }, 1000);
+  }
+}
+function timerstyle() {
+  context.fillStyle = "#FFF";
+  context.font = "30px Verdana";
+  context.fillText(ab, 1300, 30);
+}
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
@@ -231,7 +242,9 @@ function draw() {
   context.drawImage(man, manX, manY);
   hitbox();
   remove();
+  timerstyle();
   requestAnimationFrame(draw);
 }
 
 draw();
+timer();
