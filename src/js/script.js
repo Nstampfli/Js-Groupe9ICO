@@ -4,6 +4,7 @@ const context = canvas.getContext("2d");
 //Load Image
 
 const bridge = new Image();
+const station = new Image();
 const firstBuilding = new Image();
 const secondBuilding = new Image();
 const train = new Image();
@@ -18,6 +19,7 @@ firstBuilding.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
 secondBuilding.src = "../assets/blue_building.png";
 bridge.src = "../assets/bridge.png";
+station.src = "../assets/station.png";
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
 pinkCar.src = "../assets/pink_car.png";
@@ -58,6 +60,7 @@ let strollerSpeed = 3;
 let speed_build = 1;
 let speed_build2 = 0.09;
 let speedTrain = 0.13;
+let speedStation = 2;
 let jumpup;
 let jumpdown;
 
@@ -77,6 +80,11 @@ building[0] = {
   x: canvas.width,
   y: 150
 };*/
+let stationBuilding = [];
+stationBuilding[0] ={
+  x: canvas.width,
+  y: 150
+};
 let trainMov = [];
 trainMov[0] = {
   x: -540,
@@ -136,7 +144,7 @@ function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
     trainMov[i].x += speedTrain;
-    if (trainMov[i].x + train.width >= 960) {
+    if (trainMov[i].x + train.width >= canvas.width - train.width) {
       speedTrain = 0;
     }
   }
@@ -239,19 +247,28 @@ function build2() {
   }
 }
 
-/*building 3
-  for (let i = 0; i < building.length; i++) {
-    context.drawImage(third_Building, building[i].x, building[i].y);
-    building[i].x -= speed_build;
-
-    if (building[i].x === 664) {
-      building.push({
-        x: canvas.width,
-        y: 150
-      });
+/*building 3*/
+function buildStation() {
+  for (let i = 0; i < stationBuilding.length; i++) {
+    context.drawImage(station, stationBuilding[i].x, stationBuilding[i].y);
+    stationBuilding[i].x -= speedStation;
+    console.log(stationBuilding[i].x);
+     
+    if (parseInt(stationBuilding[i].x, 10) + station.width <= 1366) {
+      speedStation = 0;
+      }
     }
   }
-  */
+  
+  function trainAction() {
+    for (let i = 0; i < trainMov.length; i++) {
+      context.drawImage(train, trainMov[i].x, trainMov[i].y);
+      trainMov[i].x += speedTrain;
+      if (trainMov[i].x + train.width >= 960) {
+        speedTrain = 0;
+      }
+    }
+  }
 
 // Jump function
 function jumping() {
@@ -299,13 +316,14 @@ function timerstyle() {
 function draw() {
   context.drawImage(sky, 0, 0);
   build2();
+  trainAction();
+  buildStation();
   context.drawImage(bridge, 0, 450);
   context.drawImage(bridge, 523, 450);
   context.drawImage(bridge, 1046, 450);
-  trainAction();
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
-  context.drawImage(man, manX, manY);
+  context.drawImage(man, manX, manY); 
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
