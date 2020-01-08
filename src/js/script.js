@@ -28,9 +28,11 @@ stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 
 //Position
-let ab = 120;
+let time = 120;
 let manX = 150;
-let manY = 400;
+let manY = 500;
+let speedleft = 5;
+let speedright = 5;
 let obstacles = [];
 obstacles[0] = {
   x: canvas.width,
@@ -54,6 +56,7 @@ strollers[0] = {
   x: canvas.width,
   y: 540
 };
+let life = 3;
 let pinkCarSpeed = 5;
 let redCarSpeed = 4;
 let strollerSpeed = 3;
@@ -63,6 +66,7 @@ let speedTrain = 0.13;
 let speedStation = 2;
 let jumpup;
 let jumpdown;
+let toto;
 
 /*let speed_build3 =1.5;      <Add building 3 if needed>*/
 let building = [];
@@ -95,19 +99,27 @@ let buildingcreate = true;
 let jumps = false;
 
 //Hit Box
-function hitbox() {
-  for (let i = 0; i < obstacles.length; i++) {
+function hitbox(arrayname, imgname) {
+  for (let i = 0; i < arrayname.length; i++) {
     if (
       !invincible &&
-      obstacles[i].y <= manY + man.height &&
-      manX + man.width >= obstacles[i].x &&
-      manX <= obstacles[i].x + pinkCar.width
+      arrayname[i].y <= manY + man.height &&
+      manX + man.width >= arrayname[i].x &&
+      manX <= arrayname[i].x + imgname.width
     ) {
+      if (life > 0) {
+        life--;
+      }
       console.log("lol");
       invincible = true;
       setTimeout(() => (invincible = false), 1500);
     }
   }
+}
+function lifestyle() {
+  context.fillStyle = "#000";
+  context.font = "30px Verdana";
+  context.fillText("Vie : " + life, 0, 30);
 }
 
 function remove() {
@@ -138,7 +150,6 @@ function remove() {
   }
 }
 
-
 //function movement train (in progress : associate with life & time)
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
@@ -151,7 +162,7 @@ function trainAction() {
 }
 
 //function random obs     -----standby-----
-function getRandom () {
+function getRandom() {
   return Math.floor(Math.random() * 3);
 }
 
@@ -167,13 +178,13 @@ function firstCarsCreate() {
     context.drawImage(pinkCar, pinkCars[i].x, pinkCars[i].y);
     pinkCars[i].x -= pinkCarSpeed;
     //if (obstacles[i].x === 1141) {
-      // setTimeout(function() {
-      //   //console.log("draw car");
-      //   obstacles.push({
-      //     x: canvas.width,
-      //     y: 540
-      //   });
-      // }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
+    // setTimeout(function() {
+    //   //console.log("draw car");
+    //   obstacles.push({
+    //     x: canvas.width,
+    //     y: 540
+    //   });
+    // }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
     //}
   }
 }
@@ -185,12 +196,10 @@ function secondCarsCreate() {
   }
 }
 
-
 function strollersCreate() {
   for (let i = 0; i < strollers.length; i++) {
     context.drawImage(stroller, strollers[i].x, strollers[i].y);
     strollers[i].x -= strollerSpeed;
-
   }
 }
 
@@ -213,7 +222,6 @@ function addStrollers() {
     x: canvas.width,
     y: 540
   });
-
 }
 
 /* Building movement speed
@@ -275,11 +283,11 @@ function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
     manY--;
-    if (manY < 225) {
+    if (manY < 315) {
       clearInterval(jumpup);
       jumpdown = setInterval(() => {
         manY++;
-        if (manY == 400) {
+        if (manY == 500) {
           clearInterval(jumpdown);
           jumps = false;
         }
@@ -287,30 +295,48 @@ function jumping() {
     }
   }, 5);
 }
+function mooveleft() {
+  manX -= speedleft;
+}
+function mooveright() {
+  manX += speedright;
+}
 
 function jump(event) {
   switch (event.keyCode) {
-    case 32:
+    case 38:
       if (jumps == false) {
         jumping();
       }
       break;
-
+    case 37:
+      if (manX > 0) {
+        mooveleft();
+      }
+      break;
+    case 39:
+      if (manX + man.width < canvas.width) {
+        mooveright();
+      }
+      break;
     default:
       break;
   }
 }
 function timer() {
-  if (ab >= 0) {
-    setInterval(() => {
-      ab--;
+  if (time > 0) {
+    toto = setInterval(() => {
+      time--;
+      if (time === 0) {
+        clearInterval(toto);
+      }
     }, 1000);
   }
 }
 function timerstyle() {
-  context.fillStyle = "#FFF";
+  context.fillStyle = "#000";
   context.font = "30px Verdana";
-  context.fillText(ab, 1300, 30);
+  context.fillText(time, 1300, 30);
 }
 //Draw
 function draw() {
@@ -323,12 +349,15 @@ function draw() {
   context.drawImage(bridge, 1046, 450);
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
-  context.drawImage(man, manX, manY); 
+  context.drawImage(man, manX, manY);
+  lifestyle();
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
   window.addEventListener("keydown", jump);
-  hitbox();
+  hitbox(pinkCars, pinkCar);
+  hitbox(redCars, redCar);
+  hitbox(strollers, stroller);
   remove();
   timerstyle();
   requestAnimationFrame(draw);
@@ -336,8 +365,6 @@ function draw() {
 
 draw();
 
-
 setInterval(randomArray, 3000);
 
 timer();
-
