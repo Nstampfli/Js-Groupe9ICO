@@ -97,15 +97,14 @@ function remove() {
 }
 
 
-
-//function movement train associate with life & time
+//function movement train (in progress : associate with life & time)
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
     trainMov[i].x += speedTrain;
-    if (trainMov[i].x + train.width >= 960)
-    
+    if (trainMov[i].x + train.width >= 960) {
       speedTrain = 0;
+    }
   }
 }
 
@@ -127,11 +126,14 @@ function obs() {
   for (let i = 0; i < obstacles.length; i++) {
     context.drawImage(cars, obstacles[i].x, obstacles[i].y);
     obstacles[i].x -= speed;
-    if (obstacles[i].x === 661) {
-      obstacles.push({
-        x: canvas.width,
-        y: 540
-      });
+    if (obstacles[i].x === 1141) {
+      setTimeout(function() {
+        console.log("draw car");
+        obstacles.push({
+          x: canvas.width,
+          y: 540
+        });
+      }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
     }
   }
 }
@@ -186,7 +188,7 @@ function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
     manY--;
-    if (manY < 200) {
+    if (manY < 225) {
       clearInterval(jumpup);
       jumpdown = setInterval(() => {
         manY++;
