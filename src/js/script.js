@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
-//Load Image
+// Load Image
 
 const bridge = new Image();
 const station = new Image();
@@ -27,12 +27,11 @@ redCar.src = "../assets/red_car.png";
 stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 
-//Position
+// Position
 let time = 120;
 let manX = 150;
 let manY = 500;
-let speedleft = 5;
-let speedright = 5;
+
 let obstacles = [];
 obstacles[0] = {
   x: canvas.width,
@@ -56,34 +55,7 @@ strollers[0] = {
   x: canvas.width,
   y: 540
 };
-let life = 3;
-let pinkCarSpeed = 5;
-let redCarSpeed = 4;
-let strollerSpeed = 3;
-let speed_build = 1;
-let speed_build2 = 0.09;
-let speedTrain = 0.13;
-let speedStation = 2;
-let jumpup;
-let jumpdown;
-let toto;
 
-/*let speed_build3 =1.5;      <Add building 3 if needed>*/
-let building = [];
-building[0] = {
-  x: canvas.width,
-  y: 190
-};
-let building2 = [];
-building2[0] = {
-  x: canvas.width,
-  y: 278
-};
-/*let building3 = [];  <Add building 3 if needed>
-building[0] = {
-  x: canvas.width,
-  y: 150
-};*/
 let stationBuilding = [];
 stationBuilding[0] ={
   x: canvas.width,
@@ -94,9 +66,37 @@ trainMov[0] = {
   x: -540,
   y: 400
 };
+
+let building = [];
+building[0] = {
+  x: canvas.width,
+  y: 190
+};
+let building2 = [];
+building2[0] = {
+  x: canvas.width,
+  y: 278
+};
+
+//Creation of variable & their value
+let life = 3;
+let jumpup;
+let jumpdown;
+let toto;
 let invincible = false;
 let buildingcreate = true;
 let jumps = false;
+
+//speed
+let pinkCarSpeed = 5;
+let redCarSpeed = 4;
+let strollerSpeed = 3;
+let speed_build = 1;
+let speed_build2 = 0.3;
+let speedTrain = 0.15;
+let speedStation = 0.07;
+let speedleft = 5;
+let speedright = 5;
 
 //Hit Box
 function hitbox(arrayname, imgname) {
@@ -150,18 +150,18 @@ function remove() {
   }
 }
 
-//function movement train (in progress : associate with life & time)
+// function movement train (in progress : associate with life & time)
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
     trainMov[i].x += speedTrain;
-    if (trainMov[i].x + train.width >= canvas.width - train.width) {
+    /*if (trainMov[i].x + train.width >= canvas.width - train.width) {
       speedTrain = 0;
-    }
+    }*/
   }
 }
 
-//function random obs     -----standby-----
+// function Random Obs  
 function getRandom() {
   return Math.floor(Math.random() * 3);
 }
@@ -172,7 +172,7 @@ function randomArray() {
   randomObs[Math.floor(Math.random() * 3)]();
 }
 
-//Obs Movement speed
+// Obs Movement Speed
 function firstCarsCreate() {
   for (let i = 0; i < pinkCars.length; i++) {
     context.drawImage(pinkCar, pinkCars[i].x, pinkCars[i].y);
@@ -224,8 +224,9 @@ function addStrollers() {
   });
 }
 
-/* Building movement speed
-building 1 */
+// Building movement speed
+
+// Building 1 
 function build() {
   for (let i = 0; i < building.length; i++) {
     context.drawImage(firstBuilding, building[i].x, building[i].y);
@@ -238,7 +239,8 @@ function build() {
     }
   }
 }
-//building 2
+
+// Building 2
 function build2() {
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(secondBuilding, building2[i].x, building2[i].y);
@@ -255,7 +257,7 @@ function build2() {
   }
 }
 
-/*building 3*/
+// Building Train Station 
 function buildStation() {
   for (let i = 0; i < stationBuilding.length; i++) {
     context.drawImage(station, stationBuilding[i].x, stationBuilding[i].y);
@@ -267,18 +269,8 @@ function buildStation() {
       }
     }
   }
-  
-  function trainAction() {
-    for (let i = 0; i < trainMov.length; i++) {
-      context.drawImage(train, trainMov[i].x, trainMov[i].y);
-      trainMov[i].x += speedTrain;
-      if (trainMov[i].x + train.width >= 960) {
-        speedTrain = 0;
-      }
-    }
-  }
 
-// Jump function
+// Hero Jump function & Movement
 function jumping() {
   jumps = true;
   jumpup = setInterval(() => {
@@ -323,6 +315,8 @@ function jump(event) {
       break;
   }
 }
+
+//Timer function 
 function timer() {
   if (time > 0) {
     toto = setInterval(() => {
@@ -338,7 +332,8 @@ function timerstyle() {
   context.font = "30px Verdana";
   context.fillText(time, 1300, 30);
 }
-//Draw
+
+//Draw function
 function draw() {
   context.drawImage(sky, 0, 0);
   build2();
