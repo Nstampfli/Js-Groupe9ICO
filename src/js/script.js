@@ -116,7 +116,7 @@ function getRandom (max) {
 let randomObs;
 function randomArray() {
 randomObs = [obs(), build(), build2()];
-  for(let i = 0; i < randomObs.length /* || i < life.lenght*/){
+  for(let i = 0; i < randomObs.length /* || i < life.lenght*/; i++){
     randomObs[getRandom()];
 }
 
