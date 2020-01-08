@@ -26,7 +26,7 @@ stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 
 //Position
-
+let ab = 120;
 let manX = 150;
 let manY = 400;
 let obstacles = [];
@@ -167,10 +167,12 @@ function secondCarsCreate() {
   }
 }
 
+
 function strollersCreate() {
   for (let i = 0; i < strollers.length; i++) {
     context.drawImage(stroller, strollers[i].x, strollers[i].y);
     strollers[i].x -= strollerSpeed;
+
   }
 }
 
@@ -271,7 +273,18 @@ function jump(event) {
       break;
   }
 }
-
+function timer() {
+  if (ab >= 0) {
+    setInterval(() => {
+      ab--;
+    }, 1000);
+  }
+}
+function timerstyle() {
+  context.fillStyle = "#FFF";
+  context.font = "30px Verdana";
+  context.fillText(ab, 1300, 30);
+}
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
@@ -289,9 +302,14 @@ function draw() {
   context.drawImage(man, manX, manY);
   hitbox();
   remove();
+  timerstyle();
   requestAnimationFrame(draw);
 }
 
 draw();
 
+
 setInterval(randomArray, 3000);
+
+timer();
+
