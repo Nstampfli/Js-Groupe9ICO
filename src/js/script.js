@@ -41,12 +41,12 @@ let jumpdown;
 let building = [];
 building[0] = {
   x: canvas.width,
-  y: 205
+  y: 190
 };
 let building2 = [];
 building2[0] = {
   x: canvas.width,
-  y: 255
+  y: 278
 };
 /*let building3 = [];  <Add building 3 if needed>
 building[0] = {
@@ -132,7 +132,7 @@ function build() {
     if (building[i].x === 664) {
       building.push({
         x: canvas.width,
-        y: 205
+        y: 190
       });
     }
   }
@@ -146,7 +146,7 @@ function build2() {
     if (parseInt(building2[i].x, 10) === 664 && buildingcreate == true) {
       building2.push({
         x: canvas.width,
-        y: 255
+        y: 278
       });
       buildingcreate = false;
       setTimeout(() => (buildingcreate = true), 1000);
@@ -204,8 +204,8 @@ function draw() {
   context.drawImage(sky, 0, 0);
   build2();
   context.drawImage(bridge, 0, 450);
-  context.drawImage(bridge, 535, 450);
-  context.drawImage(bridge, 1070, 450);
+  context.drawImage(bridge, 523, 450);
+  context.drawImage(bridge, 1046, 450);
   trainAction();
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
