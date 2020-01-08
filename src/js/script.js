@@ -33,7 +33,7 @@ obstacles[0] = {
 let speed = 5;
 let speed_build = 1;
 let speed_build2 = 0.2;
-
+let speedTrain = 0.13;
 let jumpup;
 let jumpdown;
 
@@ -53,6 +53,11 @@ building[0] = {
   x: canvas.width,
   y: 150
 };*/
+let trainMov = [];
+trainMov[0] = {
+  x: -540,
+  y: 400
+};
 let invincible = false;
 let buildingcreate = true;
 let jumps = false;
@@ -88,6 +93,17 @@ function remove() {
     if (building2[i].x + scd_Building.width <= 0) {
       building2.shift(i, 1);
     }
+  }
+}
+
+//function movement train associate with life & time
+function trainAction() {
+  for (let i = 0; i < trainMov.length; i++) {
+    context.drawImage(train, trainMov[i].x, trainMov[i].y);
+    trainMov[i].x += speedTrain;
+    if (trainMov[i].x + train.width >= 960)
+    
+      speedTrain = 0;
   }
 }
 
@@ -190,7 +206,7 @@ function draw() {
   context.drawImage(bridge, 0, 450);
   context.drawImage(bridge, 535, 450);
   context.drawImage(bridge, 1070, 450);
-  context.drawImage(train, 0, 400);
+  trainAction();
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
   obs();
