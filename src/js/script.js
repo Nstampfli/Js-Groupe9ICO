@@ -54,6 +54,7 @@ building[0] = {
   y: 150
 };*/
 let invincible = false;
+let buildingcreate = true;
 let jumps = false;
 
 //Hit Box
@@ -68,8 +69,24 @@ function hitbox() {
       console.log("lol");
       invincible = true;
       setTimeout(() => (invincible = false), 1500);
-    } else if (obstacles[i].x + cars.width <= 0) {
+    }
+  }
+}
+
+function remove() {
+  for (let i = 0; i < obstacles.length; i++) {
+    if (obstacles[i].x + cars.width <= 0) {
       obstacles.shift(i, 1);
+    }
+  }
+  for (let i = 0; i < building.length; i++) {
+    if (building[i].x + fst_Building.width <= 0) {
+      building.shift(i, 1);
+    }
+  }
+  for (let i = 0; i < building2.length; i++) {
+    if (building2[i].x + scd_Building.width <= 0) {
+      building2.shift(i, 1);
     }
   }
 }
@@ -110,11 +127,13 @@ function build2() {
     context.drawImage(scd_Building, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
     /*console.log(i);*/
-    if (parseInt(building2[i].x, 10) === 664) {
+    if (parseInt(building2[i].x, 10) === 664 && buildingcreate == true) {
       building2.push({
         x: canvas.width,
         y: 255
       });
+      buildingcreate = false;
+      setTimeout(() => (buildingcreate = true), 1000);
     }
   }
 }
@@ -178,6 +197,7 @@ function draw() {
   window.addEventListener("keydown", jump);
   context.drawImage(man, manX, manY);
   hitbox();
+  remove();
   requestAnimationFrame(draw);
 }
 
