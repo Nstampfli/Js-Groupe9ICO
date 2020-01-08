@@ -103,9 +103,19 @@ function hitbox() {
 }
 
 function remove() {
-  for (let i = 0; i < obstacles.length; i++) {
-    if (obstacles[i].x + pinkCar.width <= 0) {
-      obstacles.shift(i, 1);
+  for (let i = 0; i < pinkCars.length; i++) {
+    if (pinkCars[i].x + pinkCar.width <= 0) {
+      pinkCars.shift(i, 1);
+    }
+  }
+  for (let i = 0; i < redCars.length; i++) {
+    if (redCars[i].x + redCar.width <= 0) {
+      redCars.shift(i, 1);
+    }
+  }
+  for (let i = 0; i < strollers.length; i++) {
+    if (strollers[i].x + stroller.width <= 0) {
+      strollers.shift(i, 1);
     }
   }
   for (let i = 0; i < building.length; i++) {
@@ -295,11 +305,11 @@ function draw() {
   trainAction();
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
+  context.drawImage(man, manX, manY);
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
   window.addEventListener("keydown", jump);
-  context.drawImage(man, manX, manY);
   hitbox();
   remove();
   timerstyle();
