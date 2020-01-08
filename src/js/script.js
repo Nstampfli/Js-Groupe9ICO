@@ -28,7 +28,7 @@ let manY = 400;
 let obstacles = [];
 obstacles[0] = {
   x: canvas.width,
-  y: 500
+  y: 540
 };
 let speed = 5;
 let speed_build = 1;
@@ -117,7 +117,7 @@ function obs() {
     if (obstacles[i].x === 661) {
       obstacles.push({
         x: canvas.width,
-        y: 500
+        y: 540
       });
     }
   }
