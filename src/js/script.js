@@ -4,21 +4,25 @@ const context = canvas.getContext("2d");
 //Load Image
 
 const bridge = new Image();
-const fst_Building = new Image();
-const scd_Building = new Image();
+const firstBuilding = new Image();
+const secondBuilding = new Image();
 const train = new Image();
 const man = new Image();
 const streetfloor = new Image();
-const cars = new Image();
+const pinkCar = new Image();
+const redCar = new Image();
+const stroller = new Image();
 const sky = new Image();
 
-fst_Building.src = "../assets/green_building.png";
+firstBuilding.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
-scd_Building.src = "../assets/blue_building.png";
+secondBuilding.src = "../assets/blue_building.png";
 bridge.src = "../assets/bridge.png";
 man.src = "../assets/man.png";
 streetfloor.src = "../assets/streetfloor.png";
-cars.src = "../assets/cars.png";
+pinkCar.src = "../assets/pink_car.png";
+redCar.src = "../assets/red_car.png";
+stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 
 //Position
@@ -30,9 +34,29 @@ obstacles[0] = {
   x: canvas.width,
   y: 540
 };
-let speed = 5;
+
+let pinkCars = [];
+pinkCars[0] = {
+  x: canvas.width,
+  y: 540
+};
+
+let redCars = [];
+redCars[0] = {
+  x: canvas.width,
+  y: 540
+};
+
+let strollers = [];
+strollers[0] = {
+  x: canvas.width,
+  y: 540
+};
+let pinkCarSpeed = 5;
+let redCarSpeed = 4;
+let strollerSpeed = 3;
 let speed_build = 1;
-let speed_build2 = 0.2;
+let speed_build2 = 0.09;
 let speedTrain = 0.13;
 let jumpup;
 let jumpdown;
@@ -69,7 +93,7 @@ function hitbox() {
       !invincible &&
       obstacles[i].y <= manY + man.height &&
       manX + man.width >= obstacles[i].x &&
-      manX <= obstacles[i].x + cars.width
+      manX <= obstacles[i].x + pinkCar.width
     ) {
       console.log("lol");
       invincible = true;
@@ -80,17 +104,17 @@ function hitbox() {
 
 function remove() {
   for (let i = 0; i < obstacles.length; i++) {
-    if (obstacles[i].x + cars.width <= 0) {
+    if (obstacles[i].x + pinkCar.width <= 0) {
       obstacles.shift(i, 1);
     }
   }
   for (let i = 0; i < building.length; i++) {
-    if (building[i].x + fst_Building.width <= 0) {
+    if (building[i].x + firstBuilding.width <= 0) {
       building.shift(i, 1);
     }
   }
   for (let i = 0; i < building2.length; i++) {
-    if (building2[i].x + scd_Building.width <= 0) {
+    if (building2[i].x + secondBuilding.width <= 0) {
       building2.shift(i, 1);
     }
   }
@@ -109,41 +133,76 @@ function trainAction() {
 }
 
 //function random obs     -----standby-----
-function getRandom (max) {
-  return Math.floor(Math.random() * Math.floor(max));
+function getRandom () {
+  return Math.floor(Math.random() * 3);
 }
 
 let randomObs;
 function randomArray() {
-randomObs = [obs(), build(), build2()];
-  for(let i = 0; i < randomObs.length /* || i < life.lenght*/; i++){
-    randomObs[getRandom()];
+  randomObs = [addFirstCar, addSecondCar, addStrollers];
+  randomObs[Math.floor(Math.random() * 3)]();
+}
+
+//Obs Movement speed
+function firstCarsCreate() {
+  for (let i = 0; i < pinkCars.length; i++) {
+    context.drawImage(pinkCar, pinkCars[i].x, pinkCars[i].y);
+    pinkCars[i].x -= pinkCarSpeed;
+    //if (obstacles[i].x === 1141) {
+      // setTimeout(function() {
+      //   //console.log("draw car");
+      //   obstacles.push({
+      //     x: canvas.width,
+      //     y: 540
+      //   });
+      // }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
+    //}
+  }
+}
+
+function secondCarsCreate() {
+  for (let i = 0; i < redCars.length; i++) {
+    context.drawImage(redCar, redCars[i].x, redCars[i].y);
+    redCars[i].x -= redCarSpeed;
   }
 }
 
 
-//Obs Movement speed
-function obs() {
-  for (let i = 0; i < obstacles.length; i++) {
-    context.drawImage(cars, obstacles[i].x, obstacles[i].y);
-    obstacles[i].x -= speed;
-    if (obstacles[i].x === 1141) {
-      setTimeout(function() {
-        console.log("draw car");
-        obstacles.push({
-          x: canvas.width,
-          y: 540
-        });
-      }, Math.floor(Math.random() * (3000 - 1500 + 1) + 1000));
-    }
+function strollersCreate() {
+  for (let i = 0; i < strollers.length; i++) {
+    context.drawImage(stroller, strollers[i].x, strollers[i].y);
+    strollers[i].x -= strollerSpeed;
+
   }
+}
+
+function addFirstCar() {
+  pinkCars.push({
+    x: canvas.width,
+    y: 540
+  });
+}
+
+function addSecondCar() {
+  redCars.push({
+    x: canvas.width,
+    y: 540
+  });
+}
+
+function addStrollers() {
+  strollers.push({
+    x: canvas.width,
+    y: 540
+  });
+
 }
 
 /* Building movement speed
 building 1 */
 function build() {
   for (let i = 0; i < building.length; i++) {
-    context.drawImage(fst_Building, building[i].x, building[i].y);
+    context.drawImage(firstBuilding, building[i].x, building[i].y);
     building[i].x -= speed_build;
     if (building[i].x === 664) {
       building.push({
@@ -156,7 +215,7 @@ function build() {
 //building 2
 function build2() {
   for (let i = 0; i < building2.length; i++) {
-    context.drawImage(scd_Building, building2[i].x, building2[i].y);
+    context.drawImage(secondBuilding, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
     /*console.log(i);*/
     if (parseInt(building2[i].x, 10) === 664 && buildingcreate == true) {
@@ -172,7 +231,7 @@ function build2() {
 
 /*building 3
   for (let i = 0; i < building.length; i++) {
-    context.drawImage(fst_Building, building[i].x, building[i].y);
+    context.drawImage(third_Building, building[i].x, building[i].y);
     building[i].x -= speed_build;
 
     if (building[i].x === 664) {
@@ -229,7 +288,6 @@ function timerstyle() {
 //Draw
 function draw() {
   context.drawImage(sky, 0, 0);
-  //randomArray();
   build2();
   context.drawImage(bridge, 0, 450);
   context.drawImage(bridge, 523, 450);
@@ -237,7 +295,9 @@ function draw() {
   trainAction();
   build();
   context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
-  obs();
+  firstCarsCreate();
+  secondCarsCreate();
+  strollersCreate();
   window.addEventListener("keydown", jump);
   context.drawImage(man, manX, manY);
   hitbox();
@@ -247,4 +307,9 @@ function draw() {
 }
 
 draw();
+
+
+setInterval(randomArray, 3000);
+
 timer();
+
