@@ -80,6 +80,7 @@ building2[0] = {
 
 //Creation of variable & their value
 let life = 3;
+let damage = false;
 let jumpup;
 let jumpdown;
 let toto;
@@ -154,7 +155,27 @@ function remove() {
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
-    trainMov[i].x += speedTrain;
+    trainMov[i].x += speedTrain;  
+    //condition of speed movement malus associate with life & time [don't Work]
+      if (life==3 && damage == false && timer >= 10){
+        speedTrain = 0.15;
+      }
+
+      else if(life==2 && damage == true && timer >= 10 ){
+        speedTrain += 1;
+        SetTimeOut(() =>{ speedTrain = 0.15;
+        damage =false, 5000
+      });
+    }
+      else if(life==1 && damage == true && timer >= 10 ){
+        speedTrain += 1;
+        SetTimeOut(() =>{ speedTrain = 0.15;
+        damage =false, 5000
+      });
+    }
+      else if(life==0 && damage == true || timer <= 0 ){
+        speedTrain += 5;
+    }
     /*if (trainMov[i].x + train.width >= canvas.width - train.width) {
       speedTrain = 0;
     }*/
@@ -245,7 +266,6 @@ function build2() {
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(secondBuilding, building2[i].x, building2[i].y);
     building2[i].x -= speed_build2;
-    /*console.log(i);*/
     if (parseInt(building2[i].x, 10) === 664 && buildingcreate == true) {
       building2.push({
         x: canvas.width,
@@ -262,8 +282,6 @@ function buildStation() {
   for (let i = 0; i < stationBuilding.length; i++) {
     context.drawImage(station, stationBuilding[i].x, stationBuilding[i].y);
     stationBuilding[i].x -= speedStation;
-    console.log(stationBuilding[i].x);
-     
     if (parseInt(stationBuilding[i].x, 10) + station.width <= 1366) {
       speedStation = 0;
       }
