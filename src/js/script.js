@@ -365,7 +365,7 @@ function timer() {
 }
 function timerStyle() {
   context.fillStyle = "#000";
-  context.font = "30px Verdana";
+  context.font = "30px pixel";
   context.fillText(time, 1300, 30);
 }
 
