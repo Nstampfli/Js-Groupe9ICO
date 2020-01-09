@@ -114,9 +114,9 @@ function hitbox(arrayName, imgName) {
   for (let i = 0; i < arrayName.length; i++) {
     if (
       !invincible &&
-      arrayName[i].y <= manY + man.height &&
-      manX + man.width >= arrayName[i].x &&
-      manX <= arrayName[i].x + imgName.width
+      arrayName[i].y + 15 <= manY + man.height &&
+      manX + man.width - 20 >= arrayName[i].x + 20 &&
+      manX + 20 <= arrayName[i].x + imgName.width - 20
     ) {
       damage = true;
       if (life > 0 && damage == true) {
@@ -312,12 +312,12 @@ function bonus() {
 function jumping() {
   jumps = true;
   jumpUp = setInterval(() => {
-    manY--;
+    manY -= 1;
     if (manY < 315) {
       clearInterval(jumpUp);
       jumpDown = setInterval(() => {
-        manY++;
-        if (manY == 500) {
+        manY += 1.8;
+        if (manY >= 500) {
           clearInterval(jumpDown);
           jumps = false;
         }
