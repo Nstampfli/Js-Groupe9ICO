@@ -367,6 +367,9 @@ function timerStyle() {
   context.fillStyle = "#000";
   context.font = "30px pixel";
   context.fillText(time, 1300, 30);
+  if (time <= 100){
+    context.fillStyle = "#ff0"
+  }
 }
 
 let i = 0;
