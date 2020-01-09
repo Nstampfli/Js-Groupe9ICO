@@ -361,8 +361,8 @@ function timer() {
 }
 function timerStyle() {
   context.fillStyle = "#000";
-  context.font = "50px pixel";
-  context.fillText(time, 1290, 50);
+  context.font = "70px pixel";
+  context.fillText(time, 1290,60);
 }
 
 let i = 0;
