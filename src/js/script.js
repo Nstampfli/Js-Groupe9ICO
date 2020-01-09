@@ -21,14 +21,20 @@ train.src = "../assets/train.png";
 secondBuilding.src = "../assets/blue_building.png";
 bridge.src = "../assets/bridge.png";
 station.src = "../assets/station.png";
-man.src = "../assets/run3.gif";
+man.src = "../assets/courir_3.png";
 streetFloor.src = "../assets/streetfloor.png";
 pinkCar.src = "../assets/pink_car.png";
 redCar.src = "../assets/red_car.png";
 stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 lightning.src = "../assets/eclair.png";
+// Arra Man
 
+let manAsset = [
+  "../assets/courir_1.png",
+  "../assets/courir_2.png",
+  "../assets/courir_3.png"
+];
 // Position
 let time = 120;
 let manX = 150;
@@ -162,30 +168,10 @@ function lifeStyle() {
   context.fillText("Vie : " + life, 0, 30);
 }
 
-function remove() {
-  for (let i = 0; i < pinkCars.length; i++) {
-    if (pinkCars[i].x + pinkCar.width <= 0) {
-      pinkCars.shift(i, 1);
-    }
-  }
-  for (let i = 0; i < redCars.length; i++) {
-    if (redCars[i].x + redCar.width <= 0) {
-      redCars.shift(i, 1);
-    }
-  }
-  for (let i = 0; i < strollers.length; i++) {
-    if (strollers[i].x + stroller.width <= 0) {
-      strollers.shift(i, 1);
-    }
-  }
-  for (let i = 0; i < building.length; i++) {
-    if (building[i].x + firstBuilding.width <= 0) {
-      building.shift(i, 1);
-    }
-  }
-  for (let i = 0; i < building2.length; i++) {
-    if (building2[i].x + secondBuilding.width <= 0) {
-      building2.shift(i, 1);
+function remove(arrayName, imgName) {
+  for (let i = 0; i < arrayName.length; i++) {
+    if (arrayName[i].x + imgName.width <= 0) {
+      arrayName.shift(i, 1);
     }
   }
 }
@@ -211,7 +197,6 @@ function firstCarsCreate() {
     pinkCars[i].x -= pinkCarSpeed;
   }
 }
-
 
 function secondCarsCreate() {
   for (let i = 0; i < redCars.length; i++) {
@@ -372,6 +357,13 @@ function timerStyle() {
   context.fillText(time, 1300, 30);
 }
 
+let i = 0;
+
+setInterval(function() {
+  i++;
+  man.src = manAsset[i % 3];
+}, 115);
+
 //Draw function
 function draw() {
   context.drawImage(sky, 0, 0);
@@ -394,7 +386,11 @@ function draw() {
   hitbox(redCars, redCar);
   hitbox(strollers, stroller);
   bonusHitbox();
-  remove();
+  remove(pinkCars, pinkCar);
+  remove(redCars, redCar);
+  remove(strollers, stroller);
+  remove(building, firstBuilding);
+  remove(building2, secondBuilding);
   timerStyle();
   requestAnimationFrame(draw);
 }
@@ -402,7 +398,6 @@ function draw() {
 draw();
 
 setTimeout(() => {
-  
   setInterval(randomArray, 3000);
 }, 4500);
 
