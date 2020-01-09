@@ -48,13 +48,13 @@ pinkCars[0] = {
 
 let redCars = [];
 redCars[0] = {
-  x: canvas.width,
+  x: canvas.width + 500,
   y: 540
 };
 
 let strollers = [];
 strollers[0] = {
-  x: canvas.width,
+  x: canvas.width + 1000,
   y: 540
 };
 
@@ -235,6 +235,7 @@ function firstCarsCreate() {
   for (let i = 0; i < pinkCars.length; i++) {
     context.drawImage(pinkCar, pinkCars[i].x, pinkCars[i].y);
     pinkCars[i].x -= pinkCarSpeed;
+  }
     //if (obstacles[i].x === 1141) {
     // setTimeout(function() {
     //   //console.log("draw car");
@@ -245,7 +246,7 @@ function firstCarsCreate() {
     // }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
     //}
   }
-}
+
 
 function secondCarsCreate() {
   for (let i = 0; i < redCars.length; i++) {
@@ -435,6 +436,9 @@ function draw() {
 
 draw();
 
-setInterval(randomArray, 3000);
+setTimeout(() => {
+  
+  setInterval(randomArray, 3000);
+}, 4000);
 
 timer();
