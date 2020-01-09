@@ -9,7 +9,7 @@ const firstBuilding = new Image();
 const secondBuilding = new Image();
 const train = new Image();
 const man = new Image();
-const streetfloor = new Image();
+const streetFloor = new Image();
 const pinkCar = new Image();
 const redCar = new Image();
 const stroller = new Image();
@@ -22,7 +22,7 @@ secondBuilding.src = "../assets/blue_building.png";
 bridge.src = "../assets/bridge.png";
 station.src = "../assets/station.png";
 man.src = "../assets/run3.gif";
-streetfloor.src = "../assets/streetfloor.png";
+streetFloor.src = "../assets/streetfloor.png";
 pinkCar.src = "../assets/pink_car.png";
 redCar.src = "../assets/red_car.png";
 stroller.src = "../assets/stroller.png";
@@ -89,33 +89,34 @@ lightnings[0] = {
 //Creation of variable & their value
 let life = 3;
 let damage = false;
-let jumpup;
-let jumpdown;
-let toto;
+let jumpUp;
+let jumpDown;
+let timeInterval;
+let randomObs;
 let invincible = false;
-let buildingcreate = true;
+let buildingCreate = true;
 let jumps = false;
-let bonuscondition = false;
+let bonusCondition = false;
 
 //speed
 let pinkCarSpeed = 5;
 let redCarSpeed = 4;
 let strollerSpeed = 3.5;
-let speed_build = 1;
-let speed_build2 = 0.3;
+let speedBuild = 1;
+let speedBuild2 = 0.3;
 let speedTrain = 0.15;
 let speedStation = 0.07;
-let speedleft = 5;
-let speedright = 5;
+let speedLeft = 5;
+let speedRight = 5;
 
 //Hit Box
-function hitbox(arrayname, imgname) {
-  for (let i = 0; i < arrayname.length; i++) {
+function hitbox(arrayName, imgName) {
+  for (let i = 0; i < arrayName.length; i++) {
     if (
       !invincible &&
-      arrayname[i].y <= manY + man.height &&
-      manX + man.width >= arrayname[i].x &&
-      manX <= arrayname[i].x + imgname.width
+      arrayName[i].y <= manY + man.height &&
+      manX + man.width >= arrayName[i].x &&
+      manX <= arrayName[i].x + imgName.width
     ) {
       damage = true;
       if (life > 0 && damage == true) {
@@ -124,40 +125,38 @@ function hitbox(arrayname, imgname) {
         setTimeout(() => {
           damage = false;
           speedTrain = 0.15;
-          console.log("LAL");
         }, 2000);
       }
       if (life == 0 && damage == true) {
         speedTrain = 20;
       }
-      console.log("lol");
       invincible = true;
       setTimeout(() => (invincible = false), 3000);
     }
   }
 }
-function bonushitbox() {
+function bonusHitbox() {
   for (let i = 0; i < lightnings.length; i++) {
     if (
-      bonuscondition == false &&
+      bonusCondition == false &&
       lightnings[i].y + lightning.height >= manY &&
       manX + man.width >= lightnings[i].x &&
       manX <= lightnings[i].x + lightning.width
     ) {
-      bonuscondition = true;
-      speedright = 20;
-      speedleft = 20;
+      bonusCondition = true;
+      speedRight = 20;
+      speedLeft = 20;
       setTimeout(() => {
-        speedright = 5;
-        speedleft = 5;
-        bonuscondition = false;
+        speedRight = 5;
+        speedLeft = 5;
+        bonusCondition = false;
         console.log("2");
       }, 5000);
     }
   }
 }
 
-function lifestyle() {
+function lifeStyle() {
   context.fillStyle = "#000";
   context.font = "30px Verdana";
   context.fillText("Vie : " + life, 0, 30);
@@ -196,35 +195,10 @@ function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
     trainMov[i].x += speedTrain;
-    //condition of speed movement malus associate with life & time [don't Work]
-
-    /*if (life == 2 && damage == true) {
-      speedTrain += 1;
-      SetTimeOut(() => {
-        speedTrain = 0.15;
-        (damage = false), 5000;
-      });
-    } else if (life == 1 && damage == true && timer >= 10) {
-      speedTrain += 1;
-      SetTimeOut(() => {
-        speedTrain = 0.15;
-        (damage = false), 5000;
-      });
-    } else if ((life == 0 && damage == true) || timer <= 0) {
-      speedTrain += 5;
-    }*/
-    /*if (trainMov[i].x + train.width >= canvas.width - train.width) {
-      speedTrain = 0;
-    }*/
   }
 }
 
 // function Random Obs
-function getRandom() {
-  return Math.floor(Math.random() * 3);
-}
-
-let randomObs;
 function randomArray() {
   randomObs = [addFirstCar, addSecondCar, addStrollers];
   randomObs[Math.floor(Math.random() * 3)]();
@@ -236,16 +210,7 @@ function firstCarsCreate() {
     context.drawImage(pinkCar, pinkCars[i].x, pinkCars[i].y);
     pinkCars[i].x -= pinkCarSpeed;
   }
-    //if (obstacles[i].x === 1141) {
-    // setTimeout(function() {
-    //   //console.log("draw car");
-    //   obstacles.push({
-    //     x: canvas.width,
-    //     y: 540
-    //   });
-    // }, Math.floor(Math.random() * (3000 - 1500 + 1) + 500));
-    //}
-  }
+}
 
 
 function secondCarsCreate() {
@@ -289,7 +254,7 @@ function addStrollers() {
 function build() {
   for (let i = 0; i < building.length; i++) {
     context.drawImage(firstBuilding, building[i].x, building[i].y);
-    building[i].x -= speed_build;
+    building[i].x -= speedBuild;
     if (building[i].x === 664) {
       building.push({
         x: canvas.width,
@@ -303,14 +268,14 @@ function build() {
 function build2() {
   for (let i = 0; i < building2.length; i++) {
     context.drawImage(secondBuilding, building2[i].x, building2[i].y);
-    building2[i].x -= speed_build2;
-    if (parseInt(building2[i].x, 10) === 664 && buildingcreate == true) {
+    building2[i].x -= speedBuild2;
+    if (parseInt(building2[i].x, 10) === 664 && buildingCreate == true) {
       building2.push({
         x: canvas.width,
         y: 278
       });
-      buildingcreate = false;
-      setTimeout(() => (buildingcreate = true), 1000);
+      buildingCreate = false;
+      setTimeout(() => (buildingCreate = true), 1000);
     }
   }
 }
@@ -347,14 +312,14 @@ function bonus() {
 // Hero Jump function & Movement
 function jumping() {
   jumps = true;
-  jumpup = setInterval(() => {
+  jumpUp = setInterval(() => {
     manY--;
     if (manY < 315) {
-      clearInterval(jumpup);
-      jumpdown = setInterval(() => {
+      clearInterval(jumpUp);
+      jumpDown = setInterval(() => {
         manY++;
         if (manY == 500) {
-          clearInterval(jumpdown);
+          clearInterval(jumpDown);
           jumps = false;
         }
       }, 5);
@@ -362,10 +327,10 @@ function jumping() {
   }, 5);
 }
 function mooveleft() {
-  manX -= speedleft;
+  manX -= speedLeft;
 }
 function mooveright() {
-  manX += speedright;
+  manX += speedRight;
 }
 
 function jump(event) {
@@ -393,15 +358,15 @@ function jump(event) {
 //Timer function
 function timer() {
   if (time > 0) {
-    toto = setInterval(() => {
+    timeInterval = setInterval(() => {
       time--;
       if (time === 0) {
-        clearInterval(toto);
+        clearInterval(timeInterval);
       }
     }, 1000);
   }
 }
-function timerstyle() {
+function timerStyle() {
   context.fillStyle = "#000";
   context.font = "30px Verdana";
   context.fillText(time, 1300, 30);
@@ -417,10 +382,10 @@ function draw() {
   context.drawImage(bridge, 523, 450);
   context.drawImage(bridge, 1046, 450);
   build();
-  context.drawImage(streetfloor, 0, canvas.height - streetfloor.height);
+  context.drawImage(streetFloor, 0, canvas.height - streetFloor.height);
   context.drawImage(man, manX, manY);
   bonus();
-  lifestyle();
+  lifeStyle();
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
@@ -428,9 +393,9 @@ function draw() {
   hitbox(pinkCars, pinkCar);
   hitbox(redCars, redCar);
   hitbox(strollers, stroller);
-  bonushitbox();
+  bonusHitbox();
   remove();
-  timerstyle();
+  timerStyle();
   requestAnimationFrame(draw);
 }
 
@@ -439,6 +404,6 @@ draw();
 setTimeout(() => {
   
   setInterval(randomArray, 3000);
-}, 4000);
+}, 4500);
 
 timer();
