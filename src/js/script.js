@@ -31,13 +31,14 @@ sky.src = "../assets/sky.png";
 lightning.src = "../assets/eclair.png";
 lifes.src = "../assets/heart.png";
 
-// Arra Man
+// Array Man
 
 let manAsset = [
   "../assets/courir_1.png",
   "../assets/courir_2.png",
   "../assets/courir_3.png"
 ];
+
 // Position
 let time = 120;
 let manX = 150;
@@ -46,6 +47,7 @@ let lifes1Y = 20;
 let lifes2Y = 20;
 let lifes3Y = 20;
 
+// Dictionnaires
 let obstacles = [];
 obstacles[0] = {
   x: canvas.width,
@@ -359,8 +361,8 @@ function timer() {
 }
 function timerStyle() {
   context.fillStyle = "#000";
-  context.font = "40px pixel";
-  context.fillText(time, 1290, 40);
+  context.font = "50px pixel";
+  context.fillText(time, 1290, 50);
 }
 
 let i = 0;
