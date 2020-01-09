@@ -218,12 +218,6 @@ function strollersCreate() {
   }
 }
 
-function life1() {
-  if (damage = true){
-
-  }
-}
-
 function addFirstCar() {
   pinkCars.push({
     x: canvas.width,
@@ -365,11 +359,8 @@ function timer() {
 }
 function timerStyle() {
   context.fillStyle = "#000";
-  context.font = "30px pixel";
-  context.fillText(time, 1300, 30);
-  if (time <= 100){
-    context.fillStyle = "#ff0"
-  }
+  context.font = "40px pixel";
+  context.fillText(time, 1290, 40);
 }
 
 let i = 0;
