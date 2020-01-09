@@ -9,6 +9,8 @@ body,
 html {
   padding: 0;
   margin: 0;
+}
+.gameover_screen {
   background-image: url("../assets/background-image3a.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -16,7 +18,6 @@ html {
   -webkit-background-size: cover;
   background-size: cover;
 }
-
 a {
   text-decoration: none;
 }
