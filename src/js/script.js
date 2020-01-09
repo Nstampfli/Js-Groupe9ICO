@@ -99,15 +99,15 @@ let jumps = false;
 let bonusCondition = false;
 
 //speed
-let pinkCarSpeed = 5;
-let redCarSpeed = 4;
-let strollerSpeed = 3.5;
+let pinkCarSpeed = 4.5;
+let redCarSpeed = 3.7;
+let strollerSpeed = 2.5;
 let speedBuild = 1;
 let speedBuild2 = 0.3;
 let speedTrain = 0.15;
 let speedStation = 0.07;
-let speedLeft = 5;
-let speedRight = 5;
+let speedLeft = 13;
+let speedRight = 13;
 
 //Hit Box
 function hitbox(arrayName, imgName) {
@@ -144,13 +144,12 @@ function bonusHitbox() {
       manX <= lightnings[i].x + lightning.width
     ) {
       bonusCondition = true;
-      speedRight = 20;
-      speedLeft = 20;
+      speedRight = 25;
+      speedLeft = 25;
       setTimeout(() => {
-        speedRight = 5;
-        speedLeft = 5;
+        speedRight = 13;
+        speedLeft = 13;
         bonusCondition = false;
-        console.log("2");
       }, 5000);
     }
   }
