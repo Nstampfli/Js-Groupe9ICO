@@ -79,6 +79,15 @@ a {
     font-weight: 500;
     color: white;
   }
+
+  .containerHomepage--middleFlex--rules--text__endline {
+    font-family: "Ubuntu", sans-serif;
+    margin-top: 1%;
+    line-height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(243, 90, 43);
+  }
 }
 
 .containerHomepage--middleFlex--howToPlay {
@@ -99,12 +108,48 @@ a {
     color: white;
   }
 
+  .containerHomepage--middleFlex--howToPlay_flex_img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .key-text-command-right {
+    width: 20%;
+    padding-top: 3%;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    color: white;
+  }
+
+  .key-text-command-left {
+    width: 17%;
+    padding-top: 3%;
+    padding-left: 3%;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    color: white;
+  }
+
+  .key-text-command-up {
+    width: 10%;
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 7%;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    color: white;
+  }
+
   .containerHomepage--middleFlex--howToPlay--text {
     font-family: "Ubuntu", sans-serif;
     margin-top: 7%;
     line-height: 26px;
     font-weight: 700;
     color: white;
+  }
+
+  .containerHomepage--middleFlex--howToPlay__arrowRight {
+    width: 30px;
   }
 }
 

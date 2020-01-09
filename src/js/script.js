@@ -206,6 +206,7 @@ function game() {
         }
         invincible = true;
         setTimeout(() => (invincible = false), 3000);
+
       }
     }
   }
@@ -266,6 +267,7 @@ function game() {
     }
   }
 
+
   function strollersCreate() {
     for (let i = 0; i < strollers.length; i++) {
       context.drawImage(stroller, strollers[i].x, strollers[i].y);
@@ -284,6 +286,7 @@ function game() {
       y: 540
     });
   }
+
 
   function addSecondCar() {
     redCars.push({
@@ -405,6 +408,13 @@ function game() {
         break;
     }
   }
+
+}
+function timerStyle() {
+  context.fillStyle = "#000";
+  context.font = "70px pixel";
+  context.fillText(time, 1290,60);
+
 
   //Timer function
   function timer() {
