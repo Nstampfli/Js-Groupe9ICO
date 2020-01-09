@@ -2,14 +2,19 @@
 
 @font-face {
   font-family: "Title font";
-  src: url("../assets/font/04B_03__.TTF");
+  src: url("../assets/font/pixel.TTF");
 }
 
 body,
 html {
   padding: 0;
   margin: 0;
-  background-image: url("../assets/record-du-monde-super-mario-bros-40736.png");
+  background-image: url("../assets/background-image3a.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 
 a {
@@ -19,7 +24,7 @@ a {
 .container--endGame {
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .container--endGame--flex {
