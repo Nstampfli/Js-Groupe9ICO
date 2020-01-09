@@ -15,6 +15,7 @@ const redCar = new Image();
 const stroller = new Image();
 const sky = new Image();
 const lightning = new Image();
+const lifes = new Image();
 
 firstBuilding.src = "../assets/green_building.png";
 train.src = "../assets/train.png";
@@ -28,6 +29,8 @@ redCar.src = "../assets/red_car.png";
 stroller.src = "../assets/stroller.png";
 sky.src = "../assets/sky.png";
 lightning.src = "../assets/eclair.png";
+lifes.src = "../assets/heart.png";
+
 // Arra Man
 
 let manAsset = [
@@ -39,6 +42,9 @@ let manAsset = [
 let time = 120;
 let manX = 150;
 let manY = 500;
+let lifes1Y = 20;
+let lifes2Y = 20;
+let lifes3Y = 20;
 
 let obstacles = [];
 obstacles[0] = {
@@ -127,6 +133,11 @@ function hitbox(arrayName, imgName) {
       damage = true;
       if (life > 0 && damage == true) {
         life--;
+        if (life == 2)
+        lifes3Y = -70;
+        else if (life == 1)
+        lifes2Y = -70;
+
         speedTrain = 1;
         setTimeout(() => {
           damage = false;
@@ -134,6 +145,7 @@ function hitbox(arrayName, imgName) {
         }, 2000);
       }
       if (life == 0 && damage == true) {
+        lifes1Y = -70;
         speedTrain = 20;
       }
       invincible = true;
@@ -161,16 +173,11 @@ function bonusHitbox() {
   }
 }
 
-function lifeStyle() {
-  context.fillStyle = "#000";
-  context.font = "30px ../assets/font/pixel.TTF";
-  context.fillText("Vie : " + life, 0, 30);
-}
-
 function remove(arrayName, imgName) {
   for (let i = 0; i < arrayName.length; i++) {
     if (arrayName[i].x + imgName.width <= 0) {
       arrayName.shift(i, 1);
+
     }
   }
 }
@@ -208,6 +215,12 @@ function strollersCreate() {
   for (let i = 0; i < strollers.length; i++) {
     context.drawImage(stroller, strollers[i].x, strollers[i].y);
     strollers[i].x -= strollerSpeed;
+  }
+}
+
+function life1() {
+  if (damage = true){
+
   }
 }
 
@@ -366,6 +379,9 @@ setInterval(function() {
 //Draw function
 function draw() {
   context.drawImage(sky, 0, 0);
+  context.drawImage(lifes, 15, lifes1Y)
+  context.drawImage(lifes, 70, lifes2Y)
+  context.drawImage(lifes, 125, lifes3Y)
   build2();
   trainAction();
   buildStation();
@@ -376,7 +392,6 @@ function draw() {
   context.drawImage(streetFloor, 0, canvas.height - streetFloor.height);
   context.drawImage(man, manX, manY);
   bonus();
-  lifeStyle();
   firstCarsCreate();
   secondCarsCreate();
   strollersCreate();
