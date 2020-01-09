@@ -163,7 +163,7 @@ function bonusHitbox() {
 
 function lifeStyle() {
   context.fillStyle = "#000";
-  context.font = "30px Verdana";
+  context.font = "30px ../assets/font/pixel.TTF";
   context.fillText("Vie : " + life, 0, 30);
 }
 
@@ -397,7 +397,9 @@ function draw() {
 draw();
 
 setTimeout(() => {
-  setInterval(randomArray, 3000);
+  
+  setInterval(randomArray, 3500);
+
 }, 4500);
 
 timer();
