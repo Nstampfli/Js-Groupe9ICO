@@ -1,14 +1,16 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../scss/style_game.scss" />
+    <link rel="stylesheet" href="../scss/style_video.scss" />
     <title>Save It</title>
   </head>
   <body>
-    <canvas id="canvas" width="1366" height="750"></canvas>
-    <script src="../js/script.js"></script>
+    <div class="fullscreen-bg">
+      <video autoplay class="fullscreen-bg__video">
+        <source src="../assets/intro-video.mp4" type="video/mp4" />
+      </video>
+    </div>
   </body>
 </html>
