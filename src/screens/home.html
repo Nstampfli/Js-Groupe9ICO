@@ -58,16 +58,31 @@
         <div class="containerHomepage--creditFlex">
           <div class="containerHomepage--creditFlex-text">
             <a href="">&copy crédit</a>
-            <audio controls autoplay loop>
+            <!-- <audio controls autoplay loop>
               <source
                 class="containerHomepage--creditFlex-bgsound"
                 src="../assets/sound/Menu.ogg"
                 type="audio/ogg"
               />
+            </audio> -->
+            <audio autoplay>
+              <source src = "../assets/sound/Menu.mp3" type="audio/mp3">
             </audio>
+            </iframe>
           </div>
         </div>
       </section>
     </main>
+    <!-- <iframe
+              src="../assets/sound/Menu.mp3"
+              type="audio/mp3"
+              allow="autoplay"
+              id="iframeAudio"
+            > -->
+    <script>
+    window.onload = function() {
+      var context = new AudioContext();
+    }
+    </script>
   </body>
 </html>
