@@ -100,7 +100,7 @@ let bonuscondition = false;
 //speed
 let pinkCarSpeed = 5;
 let redCarSpeed = 4;
-let strollerSpeed = 3;
+let strollerSpeed = 3.5;
 let speed_build = 1;
 let speed_build2 = 0.3;
 let speedTrain = 0.15;
@@ -117,12 +117,22 @@ function hitbox(arrayname, imgname) {
       manX + man.width >= arrayname[i].x &&
       manX <= arrayname[i].x + imgname.width
     ) {
-      if (life > 0) {
+      damage = true;
+      if (life > 0 && damage == true) {
         life--;
+        speedTrain = 1;
+        setTimeout(() => {
+          damage = false;
+          speedTrain = 0.15;
+          console.log("LAL");
+        }, 2000);
+      }
+      if (life == 0 && damage == true) {
+        speedTrain = 20;
       }
       console.log("lol");
       invincible = true;
-      setTimeout(() => (invincible = false), 1500);
+      setTimeout(() => (invincible = false), 3000);
     }
   }
 }
@@ -130,13 +140,13 @@ function bonushitbox() {
   for (let i = 0; i < lightnings.length; i++) {
     if (
       bonuscondition == false &&
-      lightnings[i].y <= manY + man.height &&
+      lightnings[i].y + lightning.height >= manY &&
       manX + man.width >= lightnings[i].x &&
       manX <= lightnings[i].x + lightning.width
     ) {
       bonuscondition = true;
-      speedright = 100;
-      speedleft = 100;
+      speedright = 20;
+      speedleft = 20;
       setTimeout(() => {
         speedright = 5;
         speedleft = 5;
@@ -185,27 +195,24 @@ function remove() {
 function trainAction() {
   for (let i = 0; i < trainMov.length; i++) {
     context.drawImage(train, trainMov[i].x, trainMov[i].y);
-    trainMov[i].x += speedTrain;  
+    trainMov[i].x += speedTrain;
     //condition of speed movement malus associate with life & time [don't Work]
-      if (life==3 && damage == false && timer >= 10){
-        speedTrain = 0.15;
-      }
 
-      else if(life==2 && damage == true && timer >= 10 ){
-        speedTrain += 1;
-        SetTimeOut(() =>{ speedTrain = 0.15;
-        damage =false, 5000
+    /*if (life == 2 && damage == true) {
+      speedTrain += 1;
+      SetTimeOut(() => {
+        speedTrain = 0.15;
+        (damage = false), 5000;
       });
-    }
-      else if(life==1 && damage == true && timer >= 10 ){
-        speedTrain += 1;
-        SetTimeOut(() =>{ speedTrain = 0.15;
-        damage =false, 5000
+    } else if (life == 1 && damage == true && timer >= 10) {
+      speedTrain += 1;
+      SetTimeOut(() => {
+        speedTrain = 0.15;
+        (damage = false), 5000;
       });
-    }
-      else if(life==0 && damage == true || timer <= 0 ){
-        speedTrain += 5;
-    }
+    } else if ((life == 0 && damage == true) || timer <= 0) {
+      speedTrain += 5;
+    }*/
     /*if (trainMov[i].x + train.width >= canvas.width - train.width) {
       speedTrain = 0;
     }*/
